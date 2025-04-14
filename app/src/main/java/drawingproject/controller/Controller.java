@@ -6,6 +6,10 @@ public class Controller {
    }
 
    public void start(){
-      
+
+   }
+
+   public void handleError(Error error){
+      System.err.println(error.getMessage() + error.getStackTrace());
    }
 }
