@@ -4,17 +4,17 @@ import javax.swing.JOptionPane;
 import drawingproject.view.ArtFrame;
 
 public class Controller {
-   private ArtFrame frame;
+   private ArtFrame window;
 
    public Controller(){
-      frame = new ArtFrame(this);
+      window = new ArtFrame(this);
    }
 
    public void start(){
-      JOptionPane.showMessageDialog(frame, "Welcome to Java Art!");
+      JOptionPane.showMessageDialog(window, "Welcome to Java Art!");
    }
 
-   public void handleError(Error error){
-      System.err.println(error.getMessage() + error.getStackTrace());
+   public void handleError(Exception error){
+      JOptionPane.showMessageDialog(window, error.getMessage(), "Java Art Error!", JOptionPane.ERROR_MESSAGE);
    }
 }

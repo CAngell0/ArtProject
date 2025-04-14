@@ -11,7 +11,7 @@ public class ArtFrame extends JFrame {
    public ArtFrame(Controller app){
       super();
       this.app = app;
-      this.artPanel = new ArtPanel();
+      this.artPanel = new ArtPanel(app);
 
       setupFrame();
    }
