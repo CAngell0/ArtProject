@@ -21,7 +21,9 @@ public class ArtPanel extends JPanel {
    }
 
    public void setupPanel(){
-
+      this.setLayout(layout);
+      this.add(buttonPanel);
+      this.buttonPanel.add(saveButton);
    }
 
    public void setupListeners(){
