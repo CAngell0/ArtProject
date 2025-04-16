@@ -52,7 +52,7 @@ public class CanvasPanel extends JPanel {
    }
 
    private void drawShapes(Graphics2D drawingTool){
-      drawingTool.draw(drawBoot());
+      drawingTool.draw(drawBoot(10,10,2));
    }
 
    @Override
@@ -61,86 +61,83 @@ public class CanvasPanel extends JPanel {
       graphics.drawImage(canvasImage, 0, 0, null);
    }
 
-   private Polygon drawBoot(){
+   private Polygon drawBoot(int x, int y, double scaleFactor){
       Polygon shape;
       int[] xPoints = {0, 30, 40, 60, 20, 0};
       int[] yPoints = {0, 0, 30, 50, 40, 0};
-      
-      double scaleFactor = 1;
-      xPoints = scaleValues(xPoints, scaleFactor);
-      yPoints = scaleValues(yPoints, scaleFactor);
+
+      xPoints = adjustValues(xPoints, x, scaleFactor);
+      yPoints = adjustValues(yPoints, y, scaleFactor);
 
       shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
 
-   private Polygon drawDiamond(){
+   private Polygon drawDiamond(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
-      shape.addPoint(20, 0);
-      shape.addPoint(40, 30);
-      shape.addPoint(30, 60);
-      shape.addPoint(20, 70);
-      shape.addPoint(10, 60);
-      shape.addPoint(0, 30);
-      shape.addPoint(20, 0);
+      shape.addPoint((int) (20 * scaleFactor) + x, (int) (0 * scaleFactor) + y);
+      shape.addPoint((int) (40 * scaleFactor) + x, (int) (30 * scaleFactor) + y);
+      shape.addPoint((int) (30 * scaleFactor) + x, (int) (60 * scaleFactor) + y);
+      shape.addPoint((int) (20 * scaleFactor) + x, (int) (70 * scaleFactor) + y);
+      shape.addPoint((int) (10 * scaleFactor) + x, (int) (60 * scaleFactor) + y);
+      shape.addPoint((int) (0 * scaleFactor) + x, (int) (30 * scaleFactor) + y);
+      shape.addPoint((int) (20 * scaleFactor) + x, (int) (0 * scaleFactor) + y);
 
       return shape;
    }
 
-   private Polygon drawCube(){
+   private Polygon drawCube(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       int[] xPoints = {0, 10, 40, 40, 30, 30, 40, 30, 0, 0, 30, 30};
       int[] yPoints = {10, 0, 0, 30, 40, 10, 0, 10, 10, 40, 40, 10};
 
-      double scaleFactor = 1;
-      xPoints = scaleValues(xPoints, scaleFactor);
-      yPoints = scaleValues(yPoints, scaleFactor);
+      xPoints = adjustValues(xPoints, x, scaleFactor);
+      yPoints = adjustValues(yPoints, y, scaleFactor);
 
       shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
 
-   private Polygon drawGem(){
+   private Polygon drawGem(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       int[] xPoints = {40, 30, 10, 0, 0, 10, 10, 0, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40};
       int[] yPoints = {0, 10, 10, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40, 40, 0, 10, 30, 40};
 
-      double scaleFactor = 1;
-      xPoints = scaleValues(xPoints, scaleFactor);
-      yPoints = scaleValues(yPoints, scaleFactor);
+      xPoints = adjustValues(xPoints, x, scaleFactor);
+      yPoints = adjustValues(yPoints, y, scaleFactor);
 
       shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
 
-   private Polygon drawArrow(){
+   private Polygon drawArrow(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       int[] xPoints = {10, 20, 10, 20, 40, 30, 40, 30, 40, 90, 90, 120, 90, 90};
       int[] yPoints = {10, 20, 30, 20, 20, 10, 20, 30, 20, 20, 0, 20, 40, 20};
 
-      double scaleFactor = 1;
-      xPoints = scaleValues(xPoints, scaleFactor);
-      yPoints = scaleValues(yPoints, scaleFactor);
+      xPoints = adjustValues(xPoints, x, scaleFactor);
+      yPoints = adjustValues(yPoints, y, scaleFactor);
 
       shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
 
-   private Ellipse2D.Double drawOval(){
-      Ellipse2D.Double shape = new Ellipse2D.Double(0, 0, 80, 40);
+   private Ellipse2D.Double drawOval(int x, int y, double scaleFactor){
+      Ellipse2D.Double shape = new Ellipse2D.Double(x, y, 80 * scaleFactor, 40 * scaleFactor);
 
       return shape;
    }
 
-   private int[] scaleValues(int[] values, double scaleFactor){
+   private int[] adjustValues(int[] values, int originOffset, double scaleFactor){
       int[] result = values;
 
       for (int index = 0; index < result.length; index++){
          result[index] = (int) Math.round(result[index] * scaleFactor);
+         result[index] += originOffset;
       }
 
       return result;
