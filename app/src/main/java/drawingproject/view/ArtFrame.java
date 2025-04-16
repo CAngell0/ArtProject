@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import drawingproject.controller.Controller;
 
 public class ArtFrame extends JFrame {
+   @SuppressWarnings("unused")
    private Controller app;
    private ArtPanel artPanel;
 

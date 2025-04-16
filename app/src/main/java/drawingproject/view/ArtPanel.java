@@ -7,6 +7,7 @@ import javax.swing.SpringLayout;
 import drawingproject.controller.Controller;
 
 public class ArtPanel extends JPanel {
+   @SuppressWarnings("unused")
    private Controller app;
    private SpringLayout layout;
    private JPanel buttonPanel;
@@ -36,7 +37,7 @@ public class ArtPanel extends JPanel {
    }
 
    public void setupListeners(){
-
+      saveButton.addActionListener(click -> canvas.save());
    }
 
    public void setupLayout(){
