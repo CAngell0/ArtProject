@@ -66,6 +66,21 @@ public class CanvasPanel extends JPanel {
       graphics.drawImage(canvasImage, 0, 0, null);
    }
 
+   public void save(){
+      try {
+         JFileChooser fileChooser = new JFileChooser();
+         if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION){
+            String filePath = fileChooser.getSelectedFile().getPath();
+            if (!filePath.toLowerCase().endsWith(".png")){
+               filePath += ".png";
+            }
+            ImageIO.write(canvasImage, "PNG", new File(filePath));
+         }
+      } catch (IOException | NullPointerException error){
+         app.handleError(error);
+      }
+   }
+
    /**
     * Created a boot shaped polygon object for drawing
     * @param x X position to draw the shape
