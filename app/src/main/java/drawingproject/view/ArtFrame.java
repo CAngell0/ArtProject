@@ -17,7 +17,7 @@ public class ArtFrame extends JFrame {
    }
 
    public void setupFrame(){
-      this.setSize(1200, 900);
+      this.setSize(1350, 900);
       this.setContentPane(artPanel);
       this.setTitle("Java Artwork");
       this.setResizable(false);

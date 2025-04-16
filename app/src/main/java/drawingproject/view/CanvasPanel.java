@@ -43,12 +43,16 @@ public class CanvasPanel extends JPanel {
       drawingGraphics.fill(background);
 
       drawingGraphics.setColor(new Color(0, 0, 0));
-      drawingGraphics.setStroke(new BasicStroke(8));
+      drawingGraphics.setStroke(new BasicStroke(2));
 
-      drawingGraphics.draw(drawBoot());
+      drawShapes(drawingGraphics);
 
       drawingGraphics.dispose();
-      this.repaint();
+      repaint();
+   }
+
+   private void drawShapes(Graphics2D drawingTool){
+      drawingTool.draw(drawBoot());
    }
 
    @Override
