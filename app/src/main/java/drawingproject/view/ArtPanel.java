@@ -12,16 +12,21 @@ public class ArtPanel extends JPanel {
    private JPanel buttonPanel;
    private JButton saveButton;
 
+   private CanvasPanel canvas;
+
    public ArtPanel(Controller app){
       super();
       this.app = app;
       this.layout = new SpringLayout();
       this.buttonPanel = new JPanel();
       this.saveButton = new JButton("Save");
+
+      this.canvas = new CanvasPanel();
    }
 
    public void setupPanel(){
       this.setLayout(layout);
+      this.add(canvas);
       this.add(buttonPanel);
       this.buttonPanel.add(saveButton);
    }

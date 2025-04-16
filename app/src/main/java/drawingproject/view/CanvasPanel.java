@@ -18,21 +18,49 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
 public class CanvasPanel extends JPanel {
-   public CanvasPanel(){
+   int CANVAS_WIDTH = 800;
+   int CANVAS_HEIGHT = 800;
 
+   private BufferedImage canvasImage;
+
+   public CanvasPanel(){
+      super();
+      this.canvasImage = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+      this.setMinimumSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+      
+      updateCanvas();
+   }
+
+   private void updateCanvas(){
+      Graphics2D drawingGraphics = (Graphics2D) canvasImage.getGraphics();
+      Rectangle background = new Rectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+      drawingGraphics.setColor(new Color(240, 180, 180));
+      drawingGraphics.fill(background);
+
+      drawingGraphics.setColor(new Color(0, 0, 0));
+      drawingGraphics.setStroke(new BasicStroke(8));
+
+      drawingGraphics.draw(drawBoot());
+
+      drawingGraphics.dispose();
+      this.repaint();
+   }
+
+   @Override
+   protected void paintComponent(Graphics graphics) {
+      super.paintComponent(graphics);
+      graphics.drawImage(canvasImage, 0, 0, null);
    }
 
    private Polygon drawBoot(){
       Polygon shape;
-
-      double scaleFactor = 1;
       int[] xPoints = {0, 30, 40, 60, 20, 0};
       int[] yPoints = {0, 0, 30, 50, 40, 0};
-
-      for (int index = 0; index < xPoints.length; index++){
-         xPoints[index] = (int) Math.round(xPoints[index] * scaleFactor);
-         yPoints[index] = (int) Math.round(yPoints[index] * scaleFactor);
-      }
+      
+      double scaleFactor = 1;
+      xPoints = scaleValues(xPoints, scaleFactor);
+      yPoints = scaleValues(yPoints, scaleFactor);
 
       shape = new Polygon(xPoints, yPoints, xPoints.length);
 
@@ -41,24 +69,55 @@ public class CanvasPanel extends JPanel {
 
    private Polygon drawDiamond(){
       Polygon shape = new Polygon();
+      shape.addPoint(20, 0);
+      shape.addPoint(40, 30);
+      shape.addPoint(30, 60);
+      shape.addPoint(20, 70);
+      shape.addPoint(10, 60);
+      shape.addPoint(0, 30);
+      shape.addPoint(20, 0);
 
       return shape;
    }
 
    private Polygon drawCube(){
       Polygon shape = new Polygon();
+      int[] xPoints = {0, 10, 40, 40, 30, 30, 40, 30, 0, 0, 30, 30};
+      int[] yPoints = {10, 0, 0, 30, 40, 10, 0, 10, 10, 40, 40, 10};
+
+      double scaleFactor = 1;
+      xPoints = scaleValues(xPoints, scaleFactor);
+      yPoints = scaleValues(yPoints, scaleFactor);
+
+      shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
 
    private Polygon drawGem(){
       Polygon shape = new Polygon();
+      int[] xPoints = {40, 30, 10, 0, 0, 10, 10, 0, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40};
+      int[] yPoints = {0, 10, 10, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40, 40, 0, 10, 30, 40};
+
+      double scaleFactor = 1;
+      xPoints = scaleValues(xPoints, scaleFactor);
+      yPoints = scaleValues(yPoints, scaleFactor);
+
+      shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
 
    private Polygon drawArrow(){
       Polygon shape = new Polygon();
+      int[] xPoints = {10, 20, 10, 20, 40, 30, 40, 30, 40, 90, 90, 120, 90, 90};
+      int[] yPoints = {10, 20, 30, 20, 20, 10, 20, 30, 20, 20, 0, 20, 40, 20};
+
+      double scaleFactor = 1;
+      xPoints = scaleValues(xPoints, scaleFactor);
+      yPoints = scaleValues(yPoints, scaleFactor);
+
+      shape = new Polygon(xPoints, yPoints, xPoints.length);
 
       return shape;
    }
@@ -67,5 +126,15 @@ public class CanvasPanel extends JPanel {
       Ellipse2D.Double shape = new Ellipse2D.Double(0, 0, 80, 40);
 
       return shape;
+   }
+
+   private int[] scaleValues(int[] values, double scaleFactor){
+      int[] result = values;
+
+      for (int index = 0; index < result.length; index++){
+         result[index] = (int) Math.round(result[index] * scaleFactor);
+      }
+
+      return result;
    }
 }
