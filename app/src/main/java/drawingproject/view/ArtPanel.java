@@ -2,9 +2,7 @@ package drawingproject.view;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.Spring;
 import javax.swing.SpringLayout;
-import javax.swing.SpringLayout.Constraints;
 
 import drawingproject.controller.Controller;
 

@@ -35,6 +35,7 @@ public class CanvasPanel extends JPanel {
       updateCanvas();
    }
 
+   /**Sets up and prepares the canvas for drawing */
    private void updateCanvas(){
       Graphics2D drawingGraphics = (Graphics2D) canvasImage.getGraphics();
       Rectangle background = new Rectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -51,6 +52,10 @@ public class CanvasPanel extends JPanel {
       repaint();
    }
 
+   /**
+    * Draws all the default shapes on the canvas
+    * @param drawingTool The graphics engine to draw the shapes with
+    */
    private void drawShapes(Graphics2D drawingTool){
       drawingTool.draw(drawBoot(10,10,2));
    }
@@ -61,6 +66,13 @@ public class CanvasPanel extends JPanel {
       graphics.drawImage(canvasImage, 0, 0, null);
    }
 
+   /**
+    * Created a boot shaped polygon object for drawing
+    * @param x X position to draw the shape
+    * @param y Y position to draw the shape
+    * @param scaleFactor Relative size of the shape
+    * @return The Polygon object containing the shape
+    */
    private Polygon drawBoot(int x, int y, double scaleFactor){
       Polygon shape;
       int[] xPoints = {0, 30, 40, 60, 20, 0};
@@ -74,6 +86,13 @@ public class CanvasPanel extends JPanel {
       return shape;
    }
 
+   /**
+    * Creates a diamond shaped polygon object for drawing
+    * @param x X position to draw the shape
+    * @param y Y position to draw the shape
+    * @param scaleFactor Relative size of the shape
+    * @return The Polygon object containing the shape
+    */
    private Polygon drawDiamond(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       shape.addPoint((int) (20 * scaleFactor) + x, (int) (0 * scaleFactor) + y);
@@ -87,6 +106,13 @@ public class CanvasPanel extends JPanel {
       return shape;
    }
 
+   /**
+    * Creates a cube shaped polygon object for drawing
+    * @param x X position to draw the shape
+    * @param y Y position to draw the shape
+    * @param scaleFactor Relative size of the shape
+    * @return The Polygon object containing the shape
+    */
    private Polygon drawCube(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       int[] xPoints = {0, 10, 40, 40, 30, 30, 40, 30, 0, 0, 30, 30};
@@ -100,6 +126,13 @@ public class CanvasPanel extends JPanel {
       return shape;
    }
 
+   /**
+    * Creates a gem shaped polygon object for drawing
+    * @param x X position to draw the shape
+    * @param y Y position to draw the shape
+    * @param scaleFactor Relative size of the shape
+    * @return The Polygon object containing the shape
+    */
    private Polygon drawGem(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       int[] xPoints = {40, 30, 10, 0, 0, 10, 10, 0, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40};
@@ -113,6 +146,13 @@ public class CanvasPanel extends JPanel {
       return shape;
    }
 
+   /**
+    * Creates a arrow shapes polygon object for drawing
+    * @param x X position to draw the shape
+    * @param y Y position to draw the shape
+    * @param scaleFactor Relative size of the shape
+    * @return The Polygon object containing the shape
+    */
    private Polygon drawArrow(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
       int[] xPoints = {10, 20, 10, 20, 40, 30, 40, 30, 40, 90, 90, 120, 90, 90};
@@ -126,12 +166,28 @@ public class CanvasPanel extends JPanel {
       return shape;
    }
 
+   /**
+    * Created an oval shape object
+    * @param x X position to draw the shape
+    * @param y Y position to draw the shape
+    * @param scaleFactor Relative size of the shape
+    * @return The ellipse object containing the shape
+    */
    private Ellipse2D.Double drawOval(int x, int y, double scaleFactor){
       Ellipse2D.Double shape = new Ellipse2D.Double(x, y, 80 * scaleFactor, 40 * scaleFactor);
 
       return shape;
    }
 
+   /**
+    * This method adjusts an array of x or y point values. It first adds a specified scale
+    * factor to enlarge the shape. And then offsets the points with the originOffset param.
+    * This allows the shape to change size and position
+    * @param values The values to adjust
+    * @param originOffset The new origin value you want for the shape
+    * @param scaleFactor The scale factor you multiply the shape size by
+    * @return An array of the newly adjusted values
+    */
    private int[] adjustValues(int[] values, int originOffset, double scaleFactor){
       int[] result = values;
 
