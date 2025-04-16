@@ -26,29 +26,32 @@ public class CanvasPanel extends JPanel {
    private Controller app;
    private BufferedImage canvasImage;
 
+   private Graphics2D ctx;
+   private Rectangle background;
+
    public CanvasPanel(Controller app){
       super();
       this.app = app;
       this.canvasImage = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_ARGB);
       this.setMinimumSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
+
+      ctx = (Graphics2D) canvasImage.getGraphics();
+      background = new Rectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
       
       updateCanvas();
    }
 
    /**Sets up and prepares the canvas for drawing */
    private void updateCanvas(){
-      Graphics2D drawingGraphics = (Graphics2D) canvasImage.getGraphics();
-      Rectangle background = new Rectangle(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      ctx.setColor(new Color(240, 180, 180));
+      ctx.fill(background);
 
-      drawingGraphics.setColor(new Color(240, 180, 180));
-      drawingGraphics.fill(background);
+      ctx.setColor(new Color(0, 0, 0));
+      ctx.setStroke(new BasicStroke(2));
 
-      drawingGraphics.setColor(new Color(0, 0, 0));
-      drawingGraphics.setStroke(new BasicStroke(2));
+      drawShapes();
 
-      drawShapes(drawingGraphics);
-
-      drawingGraphics.dispose();
+      ctx.dispose();
       repaint();
    }
 
@@ -56,8 +59,8 @@ public class CanvasPanel extends JPanel {
     * Draws all the default shapes on the canvas
     * @param drawingTool The graphics engine to draw the shapes with
     */
-   private void drawShapes(Graphics2D drawingTool){
-      drawingTool.draw(drawBoot(10,10,2));
+   private void drawShapes(){
+      ctx.draw(drawBoot(10,10,2));
    }
 
    @Override
@@ -66,6 +69,7 @@ public class CanvasPanel extends JPanel {
       graphics.drawImage(canvasImage, 0, 0, null);
    }
 
+   /**Saves the current artwork in canvas to a local png image based on a file chooser */
    public void save(){
       try {
          JFileChooser fileChooser = new JFileChooser();
@@ -79,6 +83,11 @@ public class CanvasPanel extends JPanel {
       } catch (IOException | NullPointerException error){
          app.handleError(error);
       }
+   }
+
+   /**Clears the current canvas of all shapes and drawing */
+   public void clear(){
+      ctx.fill(background);
    }
 
    /**
