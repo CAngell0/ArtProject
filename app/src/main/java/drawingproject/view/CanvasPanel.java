@@ -90,11 +90,6 @@ public class CanvasPanel extends JPanel {
       }
    }
 
-   /**Clears the current canvas of all shapes and drawing */
-   public void clear(){
-      ctx.fill(background);
-   }
-
    /**
     * Created a boot shaped polygon object for drawing
     * @param x X position to draw the shape
