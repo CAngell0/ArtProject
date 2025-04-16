@@ -61,6 +61,11 @@ public class CanvasPanel extends JPanel {
     */
    private void drawShapes(){
       ctx.draw(drawBoot(10,10,2));
+      ctx.draw(drawCube(100, 100,2));
+      ctx.draw(drawDiamond(253, 180, 2));
+      ctx.draw(drawGem(423, 623, 3));
+      ctx.draw(drawOval(300, 400, 2));
+      ctx.draw(drawArrow(100, 650, 2));
    }
 
    @Override
@@ -159,8 +164,8 @@ public class CanvasPanel extends JPanel {
     */
    private Polygon drawGem(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
-      int[] xPoints = {40, 30, 10, 0, 0, 10, 10, 0, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40};
-      int[] yPoints = {0, 10, 10, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40, 40, 0, 10, 30, 40};
+      int[] xPoints = {40, 30, 10, 0, 0, 10, 10, 0, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40, 40, 0};
+      int[] yPoints = {0, 10, 10, 0, 40, 30, 10, 0, 40, 40, 30, 30, 40, 40, 0, 10, 30, 40, 0, 0};
 
       xPoints = adjustValues(xPoints, x, scaleFactor);
       yPoints = adjustValues(yPoints, y, scaleFactor);
@@ -179,8 +184,8 @@ public class CanvasPanel extends JPanel {
     */
    private Polygon drawArrow(int x, int y, double scaleFactor){
       Polygon shape = new Polygon();
-      int[] xPoints = {10, 20, 10, 20, 40, 30, 40, 30, 40, 90, 90, 120, 90, 90};
-      int[] yPoints = {10, 20, 30, 20, 20, 10, 20, 30, 20, 20, 0, 20, 40, 20};
+      int[] xPoints = {10, 20, 10, 20, 40, 30, 40, 30, 40, 90, 90, 120, 90, 90, 20, 10};
+      int[] yPoints = {10, 20, 30, 20, 20, 10, 20, 30, 20, 20, 0, 20, 40, 20, 20, 10};
 
       xPoints = adjustValues(xPoints, x, scaleFactor);
       yPoints = adjustValues(yPoints, y, scaleFactor);
