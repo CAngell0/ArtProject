@@ -1,5 +1,7 @@
 package drawingproject.view;
 
+import drawingproject.controller.Controller;
+
 import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 import javax.imageio.ImageIO;
@@ -21,10 +23,12 @@ public class CanvasPanel extends JPanel {
    int CANVAS_WIDTH = 800;
    int CANVAS_HEIGHT = 800;
 
+   private Controller app;
    private BufferedImage canvasImage;
 
-   public CanvasPanel(){
+   public CanvasPanel(Controller app){
       super();
+      this.app = app;
       this.canvasImage = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_ARGB);
       this.setMinimumSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
       
